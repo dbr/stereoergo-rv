@@ -17,10 +17,12 @@ Err, more helpfully.. In stereo hotkeys mode (Alt+s to enable):
 
 # Installing
 
-Either download the rvpkg, or run "make" to generate it from source.
+Either [download the rvpkg][rvpkg], or run "make" to generate it from source.
 
 Then in RV's preference, under the "Packages" tab, click "Add
 Packages", and load the rvpkg file.
 
 In the package listing, check "Installed" and "Load" for "Stereo
 Ergonomics mode", and restart RV.
+
+ [rvpkg]: https://github.com/downloads/dbr/stereoergo-rv/stereoergo-1.0.rvpkg
