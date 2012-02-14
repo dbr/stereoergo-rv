@@ -1,0 +1,27 @@
+package: Stereo Ergonomics mode
+author: Ben Dickson (Rising Sun Pictures)
+contact: ben.dickson@rsp.com.au
+version: 1.0
+rv: 3.12.13
+
+modes:
+  - file: stereoergo.py
+    load: immediate
+
+description: |
+    <p>
+    Prevents RSI.
+    </p>
+
+    <p>
+    Err, more helpfully.. In stereo hotkeys mode (Alt+s to enable):
+
+    <ul>
+    <li>Shift+left/right adjusts convergence</li>
+    <li>Shift+up toggles scanline-interleave mode</li>
+    <li>Shift+down toggles anaglyph mode (and greyscale)</li>
+    <li>Up-arrow cycles between eyes (same with down arrow)</li>
+    <li>Page-up and Page-down step through frames then eyes (frame1-left, frame1-right, frame2-left, frame2-right etc)</li>
+    </li>
+    </ul>
+    </p>
