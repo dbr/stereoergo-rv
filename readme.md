@@ -25,4 +25,9 @@ Packages", and load the rvpkg file.
 In the package listing, check "Installed" and "Load" for "Stereo
 Ergonomics mode", and restart RV.
 
+# Change log
+
+* `v1.0`
+ * Initial release
+
  [rvpkg]: https://github.com/downloads/dbr/stereoergo-rv/stereoergo-1.0.rvpkg
