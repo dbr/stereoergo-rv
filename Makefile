@@ -1,2 +1,4 @@
-stereoergo-1.0.rvpkg:
-	zip --junk-paths stereoergo-1.0.rvpkg src/stereoergo/PACKAGE src/stereoergo/stereoergo.py
+VERSION=2.0
+
+stereoergo-${VERSION}.rvpkg:
+	zip --junk-paths stereoergo-${VERSION}.rvpkg src/stereoergo/PACKAGE src/stereoergo/stereoergo.py
