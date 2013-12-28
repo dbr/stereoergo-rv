@@ -1,7 +1,8 @@
 import rv
+import time
 
 
-def set_stereo(stereotype):
+def set_stereo(stereotype, quiet=False):
     """Sets current stereo mode
 
     stereotype is string, valid options include:
@@ -22,7 +23,8 @@ def set_stereo(stereotype):
     rv.commands.setStringProperty("#RVDisplayStereo.stereo.type", [stereotype], False)
     #rv.commands.setHardwareStereoMode(stereotype == "hardware" and stereoSupported())
 
-    rv.extra_commands.displayFeedback("Stereo Mode: %s" % stereotype, 2.0)
+    if not quiet:
+        rv.extra_commands.displayFeedback("Stereo Mode: %s" % stereotype, 2.0)
 
     rv.commands.redraw()
 
@@ -106,6 +108,10 @@ class StereoErgo(rv.rvtypes.MinorMode):
         rv.rvtypes.MinorMode.__init__(self)
         self.init("stereoergo", [], None)
 
+        self._is_running = False
+        self._last_update = time.time()
+        self.wiggle_fps = 5
+
         # All shortcuts only apply in stereo-hotkey-mode (alt+s to toggle)
 
         # PgUp/PgDown to step through frame1 left, frame1 right, frame2 left, frame2 right etc
@@ -125,6 +131,55 @@ class StereoErgo(rv.rvtypes.MinorMode):
         # Shift+left/right to adjust convergence
         rv.commands.bind("default", "stereo", "key-down--shift--left", lambda evt: nudge_conv(event = evt, left=True), "Nudge convergence left")
         rv.commands.bind("default", "stereo", "key-down--shift--right", lambda evt: nudge_conv(event = evt, right=True), "Nudge convergence right")
+
+        # "w" to enable wiggle, ; and ' to adjust speed
+        rv.commands.bind("default", "stereo", "key-down--w", self.wiggle_toggle, "Toggle wiggle mode")
+        rv.commands.bind("default", "stereo", "key-down--;", lambda evt: self.wiggle_nudge(offset=-1, evt=evt), "Wiggle increase FPS")
+        rv.commands.bind("default", "stereo", "key-down--'", lambda evt: self.wiggle_nudge(offset=1, evt=evt), "Wiggle increase FPS")
+
+
+    def wiggle_toggle(self, evt):
+        self._is_running = not self._is_running
+
+    def wiggle_nudge(self, evt, offset):
+        self.wiggle_fps = self.wiggle_fps + offset
+        self.wiggle_fps = max(1, self.wiggle_fps)
+        self.wiggle_fps = min(60, self.wiggle_fps)
+
+    def render(self, evt):
+        """Timer-like thing for stereo-wiggle mode
+        """
+
+        if evt is not None:
+            evt.reject()
+
+        if not self._is_running:
+            return
+
+        # Check if enough time has elapsed
+        now = time.time()
+        since_last = (now - self._last_update)
+        if since_last < (1.0/self.wiggle_fps):
+            # Too soon, don't update yet
+            return
+
+        self._last_update = now
+        def wiggle_step():
+            if current_stereo_mode() == "right":
+                set_stereo("left", quiet=True)
+                eye_oneletter = "L"
+            else:
+                set_stereo("right", quiet=True)
+                eye_oneletter = "R"
+
+            # Maybe slightly annoying, but the message timeout/fade
+            # ensures keeps the render method is continously called,
+            # otherwise the wiggling will stop after a few seconds
+            rv.extra_commands.displayFeedback(
+                "Wiggle %s (%s fps, press 'w' to stop, ; and ' adjust speed)" % (eye_oneletter, self.wiggle_fps),
+                1.0)
+
+        wiggle_step()
 
 
 def createMode():

@@ -22,6 +22,6 @@ description: |
     <li>Shift+down toggles anaglyph mode (and greyscale)</li>
     <li>Up-arrow cycles between eyes (same with down arrow)</li>
     <li>Page-up and Page-down step through frames then eyes (frame1-left, frame1-right, frame2-left, frame2-right etc)</li>
-    </li>
+    <li>w enables "stereo wiggle mode", and ; and ' change wiggle speed (semicolon and apostrophe)</li>
     </ul>
     </p>
