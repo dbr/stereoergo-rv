@@ -78,8 +78,7 @@ def cycle_eye(event):
 def nudge_conv(event, left = False, right = False):
     """Adjusts the relative stereo offset by a small amount
     """
-
-    node = "#RVDisplayStereo.stereo.relativeOffset"
+    node = "#RVSourceStereo.stereo.rightOffset"
     cur = rv.commands.getFloatProperty(node, 0, 1)[0]
     if left:
         cur += 0.0005
