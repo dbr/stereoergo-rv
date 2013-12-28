@@ -27,9 +27,9 @@ Ergonomics mode", and restart RV.
 
 # Change log
 
-* `v1.0` ([download](https://github.com/downloads/dbr/stereoergo-rv/stereoergo-1.0.rvpkg))
+* `v1.0` ([download](https://github.com/dbr/stereoergo-rv/releases/download/v1.0/stereoergo-1.0.rvpkg))
  * Initial release
-* `v2.0` ([download](https://github.com/downloads/dbr/stereoergo-rv/stereoergo-2.0.rvpkg))
+* `v2.0` ([download](https://github.com/dbr/stereoergo-rv/releases/download/v2.0/stereoergo-2.0.rvpkg))
  * Stereo Wiggle" mode, automatically flicks between eyes at a set
    rate, very useful for spotting stereo-depth errors in long
    sequences
@@ -37,4 +37,4 @@ Ergonomics mode", and restart RV.
    of "relative offset", same as the default "alt+s o" shortcut.
 
 
- [rvpkg]: https://github.com/downloads/dbr/stereoergo-rv/stereoergo-2.0.rvpkg
+ [rvpkg]: https://github.com/dbr/stereoergo-rv/releases/download/v2.0/stereoergo-2.0.rvpkg
